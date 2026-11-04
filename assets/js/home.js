@@ -273,7 +273,7 @@ void SITE;
 
 qs('.nav__wa')?.addEventListener('click', (e) => { e.preventDefault(); qs('#contact').scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto' }); });
 
-/* ---------- barre fixe téléphone : visible dès que le bouton du haut n'est plus à l'écran ---------- */
+/* ---------- barre fixe téléphone (bouton 3D) : visible dès que le bouton du haut n'est plus à l'écran ---------- */
 (() => {
   const bar = qs('#mcta');
   if (!bar || !('IntersectionObserver' in window)) { bar?.classList.add('is-shown'); return; }
@@ -283,7 +283,6 @@ qs('.nav__wa')?.addEventListener('click', (e) => { e.preventDefault(); qs('#cont
   const update = () => {
     const show = visible.size === 0;
     bar.classList.toggle('is-shown', show);
-    if (!show) closeMenu();
   };
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) e.isIntersecting ? visible.add(e.target) : visible.delete(e.target);
@@ -291,13 +290,4 @@ qs('.nav__wa')?.addEventListener('click', (e) => { e.preventDefault(); qs('#cont
   }, { threshold: 0.05 });
   blockers.forEach((el) => io.observe(el));
 
-  const waBtn = qs('.mcta__wa', bar);
-  const menu = qs('#mcta-menu');
-  function closeMenu() { menu.hidden = true; waBtn.setAttribute('aria-expanded', 'false'); }
-  waBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.hidden = !menu.hidden;
-    waBtn.setAttribute('aria-expanded', String(!menu.hidden));
-  });
-  document.addEventListener('click', (e) => { if (!menu.hidden && !menu.contains(e.target)) closeMenu(); });
 })();

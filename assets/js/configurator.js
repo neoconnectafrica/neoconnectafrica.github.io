@@ -234,6 +234,8 @@ if (MOBILE) {
   const recenter = h('button', { type: 'button', class: 'mtool', 'aria-label': 'Recentrer la vue', html: icon('home'), onClick: () => scene?.setView('ensemble') });
   const hint = h('div', { class: 'mhint' }, 'Glissez un doigt pour tourner la pièce');
   stage.append(h('div', { class: 'mtools' }, recenter, big), hint);
+  // Bulle WhatsApp : posée sur la maquette (coin bas droit) pour ne pas gêner les étapes ni la barre du bas.
+  const wa = qs('.wa-bubble'); if (wa) stage.append(wa);
   const hideHint = () => hint.classList.add('is-gone');
   scene?.controls.addEventListener('start', hideHint);
   setTimeout(hideHint, 6000);

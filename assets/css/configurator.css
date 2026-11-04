@@ -255,3 +255,16 @@ body.cfg-mobile .toast-host { top: calc(62px + var(--banner-h)); bottom: auto; }
 .mflow__back .ico { width: 20px; height: 20px; }
 .mflow__next { flex: none; padding: 0.85em 1.1em; font-size: 0.95rem; width: auto; }
 .mflow__next .ico { width: 1.05em; height: 1.05em; }
+
+/* Bulle WhatsApp dans le configurateur : sur la maquette, sans masquer le panneau ni le bouton « Demander un devis » */
+body.cfg-body .wa-bubble { right: calc(420px + 18px); bottom: 18px; }
+body.cfg-body .cfg-hint { right: 5.6rem; }
+@media (max-width: 960px) { body.cfg-body .wa-bubble { right: 12px; bottom: auto; top: calc(60px + var(--banner-h) + 3.6rem); flex-direction: column-reverse; align-items: flex-end; } }
+body.cfg-mobile .wa-bubble { top: auto; bottom: auto; right: 0.6rem; }
+body.cfg-mobile .cfg-stage .wa-bubble { position: absolute; bottom: 1.4rem; right: 0.6rem; top: auto; flex-direction: column; z-index: 4; }
+body.cfg-mobile .cfg-stage .wa-fab { width: 46px; height: 46px; }
+body.cfg-mobile .cfg-stage .wa-fab svg { width: 26px; height: 26px; }
+body.cfg-mobile .cfg-stage .wa-card { position: fixed; left: 12px; right: 12px; width: auto; top: calc(56px + var(--banner-h) + 8px); }
+body.cfg-mobile .cfg-stage .wa-teaser { display: none; }
+body.cfg-mobile .cfg-stage .wa-card { z-index: 6; }
+body.cfg-mobile .cfg-stage .wa-bubble.is-open .wa-fab { opacity: 0; pointer-events: none; }

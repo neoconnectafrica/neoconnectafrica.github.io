@@ -411,3 +411,8 @@ body.home { background: var(--tile-white); }
   /* espace en bas de page pour que la barre ne cache pas le pied de page */
   body.home { padding-bottom: 84px; }
 }
+/* La barre « Composer ma maison en 3D » laisse la place à la bulle WhatsApp à sa droite */
+@media (max-width: 760px) {
+  .mcta { right: 80px; }
+  .demo__voice { padding-right: 76px; }
+}
