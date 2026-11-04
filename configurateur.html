@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Configurateur 3D — Composez votre maison connectée | NÉO-CONNECT</title>
+  <meta name="description" content="Composez votre maison connectée en 3D : choisissez un pack, ajoutez caméras, serrures, capteurs, rideaux ou alarme, voyez le prix évoluer et envoyez votre projet à NÉO-CONNECT." />
+  <meta name="theme-color" content="#0f1419" />
+  <meta property="og:title" content="Configurateur 3D NÉO-CONNECT — Composez votre maison connectée" />
+  <meta property="og:image" content="assets/img/amazon/echo-trio.jpg" />
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/img/favicon-64.png" sizes="64x64" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/configurator.css" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body class="cfg-body">
+  <header class="cfg-top">
+    <a class="brand brand--logo" href="index.html" aria-label="NÉO-CONNECT, retour à l'accueil">
+      <img class="brand__img brand__img--dark" src="assets/img/logo-mark-dark.png" alt="" width="278" height="214" />
+      <span>NÉO-CONNECT</span>
+    </a>
+    <div class="cfg-top__steps" aria-hidden="true">
+      <span><b>1</b> Choisir la pièce</span>
+      <span><b>2</b> Ajouter les équipements</span>
+      <span><b>3</b> Envoyer le projet</span>
+    </div>
+    <div class="cfg-top__actions">
+      <button id="btn-undo" class="icon-btn" type="button" title="Annuler (Ctrl+Z)" aria-label="Annuler"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+      <button id="btn-redo" class="icon-btn" type="button" title="Rétablir (Ctrl+Y)" aria-label="Rétablir"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg></button>
+      <button id="btn-reset" class="icon-btn" type="button" title="Vider la maquette" aria-label="Vider la maquette"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/></svg></button>
+      <a class="cfg-top__back" href="index.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Site</span></a>
+    </div>
+  </header>
+
+  <main class="cfg">
+    <section class="cfg-stage" aria-label="Maquette 3D">
+      <div class="cfg-canvas-wrap">
+        <canvas id="scene" aria-label="Maquette 3D de la pièce. Faites glisser pour pivoter, utilisez la molette ou pincez pour zoomer." role="img"></canvas>
+        <div id="scene-fallback" class="scene-fallback" hidden>
+          <p>La maquette 3D ne peut pas s'afficher sur cet appareil (WebGL indisponible). Vous pouvez tout de même composer votre projet et envoyer votre demande depuis le panneau.</p>
+        </div>
+      </div>
+      <div id="envbar" class="cfg-float cfg-envbar" role="group" aria-label="Choisir la pièce"></div>
+      <div class="cfg-float cfg-viewbar" role="group" aria-label="Points de vue">
+        <button class="viewbtn" type="button" data-view="ensemble">Vue d'ensemble</button>
+        <button class="viewbtn" type="button" data-view="face">Face TV</button>
+        <button class="viewbtn" type="button" data-view="fenetre">Fenêtre</button>
+        <button class="viewbtn" type="button" data-view="plongee">Plan</button>
+      </div>
+      <div class="cfg-float cfg-hint">Glisser pour pivoter · molette ou pincer pour zoomer · cliquer un équipement pour le modifier</div>
+      <div id="draft-hint" class="cfg-float cfg-draft" hidden>Visuels 3D provisoires</div>
+    </section>
+
+    <aside class="cfg-panel" aria-label="Composition du projet">
+      <button id="sheet-handle" class="sheet-handle" type="button" aria-label="Agrandir ou réduire le panneau"></button>
+      <nav class="cfg-tabs" role="tablist">
+        <button class="cfg-tab-btn" type="button" role="tab" data-tab-btn="catalog">Équipements</button>
+        <button class="cfg-tab-btn" type="button" role="tab" data-tab-btn="selection">Ma sélection <span class="count" id="count-selection">0</span></button>
+        <button class="cfg-tab-btn" type="button" role="tab" data-tab-btn="quote">Devis</button>
+      </nav>
+      <div id="tab-catalog" class="cfg-tab" role="tabpanel"></div>
+      <div id="tab-selection" class="cfg-tab" role="tabpanel" hidden></div>
+      <div id="tab-quote" class="cfg-tab" role="tabpanel" hidden></div>
+      <footer class="cfg-pricebar">
+        <div>
+          <div class="cfg-pricebar__label">Estimation</div>
+          <div class="cfg-pricebar__total" id="price-total">—</div>
+          <div class="cfg-pricebar__note" id="price-note">Ajoutez un pack ou des équipements</div>
+        </div>
+        <button id="btn-quote" class="btn btn--primary" type="button">Demander un devis</button>
+      </footer>
+    </aside>
+  </main>
+
+  <script type="module" src="assets/js/configurator.js"></script>
+</body>
+</html>

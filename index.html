@@ -1,0 +1,468 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NÉO-CONNECT — Ta maison, pilotée depuis ton téléphone | Domotique au Bénin, Togo et Côte d'Ivoire</title>
+  <meta name="description" content="NÉO-CONNECT transforme votre maison en maison connectée, partout en Afrique : lumière, climatisation, télévision, musique, rideaux et sécurité pilotés depuis le téléphone. Packs Salon dès 160 000 FCFA. Composez votre projet en 3D." />
+  <meta property="og:title" content="NÉO-CONNECT — Ta maison, pilotée depuis ton téléphone" />
+  <meta property="og:description" content="Maison connectée au Bénin, au Togo et en Côte d'Ivoire. Packs Salon dès 160 000 FCFA. Composez votre maison en 3D et recevez un devis." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/amazon/echo-trio.jpg" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/img/favicon-64.png" sizes="64x64" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "NÉO-CONNECT",
+    "legalName": "Zanboss Electronics",
+    "description": "Installation de solutions de domotique et maison connectée partout en Afrique, avec des conseillers au Bénin, au Togo et en Côte d'Ivoire.",
+    "areaServed": "Afrique",
+    "slogan": "Ta maison, pilotée depuis ton téléphone."
+  }
+  </script>
+</head>
+<body class="home">
+  <header class="site-header site-header--dark" id="site-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand brand--logo" href="#top" aria-label="NÉO-CONNECT, accueil">
+        <img class="brand__img brand__img--dark" src="assets/img/logo-mark-dark.png" alt="" width="278" height="214" />
+        <img class="brand__img brand__img--light" src="assets/img/logo-mark-light.png" alt="" width="278" height="214" />
+        <span>NÉO-CONNECT</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#packs">Packs</a></li>
+        <li class="nav__opt"><a href="#configurateur">Sur mesure</a></li>
+        <li><a href="#demo">Démonstration</a></li>
+        <li><a href="#alexa">Alexa</a></li>
+        <li><a href="#equipements">Équipements</a></li>
+        <li class="nav__opt"><a href="#pourquoi">Pourquoi nous</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav__links-cta"><a class="btn btn--accent" href="configurateur.html">Composer ma maison en 3D</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a class="btn btn--ghost btn--small nav__wa" href="#contact">WhatsApp</a>
+        <a class="btn btn--accent btn--small" href="configurateur.html">Composer en 3D</a>
+        <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ================= TUILE 1 : HERO ================= -->
+    <section class="tile tile--hero hero" id="accueil">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="tile__copy">
+        <p class="tile__kicker">NÉO-CONNECT · Maison connectée</p>
+        <h1 class="tile__title hero__title">Ta maison, pilotée<br>depuis ton téléphone.</h1>
+        <p class="tile__tagline">Lumière, climatisation, télévision, musique, rideaux et sécurité. Une seule application.</p>
+        <p class="tile__meta">Partout en Afrique &nbsp;·&nbsp; Conseillers au Bénin, au Togo et en Côte d'Ivoire &nbsp;·&nbsp; Packs Salon à partir de 160 000 FCFA</p>
+        <div class="tile__actions">
+          <a class="pill pill--fill" href="configurateur.html">Composer ma maison en 3D</a>
+          <a class="pill pill--line pill--light" href="#packs">Voir les packs</a>
+        </div>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="phone">
+          <div class="phone__screen">
+            <div class="app">
+              <div class="app__head"><span>Ma maison</span><small>Salon · connecté</small></div>
+              <div class="app__grid">
+                <div class="tile-app" data-tile="light"><span class="tile-app__icon" data-icon="light"></span><span class="tile-app__name">Lumière</span><span class="toggle"><i></i></span></div>
+                <div class="tile-app" data-tile="clim"><span class="tile-app__icon" data-icon="snow"></span><span class="tile-app__name">Climatiseur</span><span class="tile-app__value">24°</span><span class="toggle"><i></i></span></div>
+                <div class="tile-app" data-tile="tv"><span class="tile-app__icon" data-icon="tv"></span><span class="tile-app__name">Télévision</span><span class="toggle"><i></i></span></div>
+                <div class="tile-app" data-tile="music"><span class="tile-app__icon" data-icon="music"></span><span class="tile-app__name">Musique</span><span class="toggle"><i></i></span></div>
+                <div class="tile-app tile-app--wide" data-tile="curtain"><span class="tile-app__icon" data-icon="curtain"></span><span class="tile-app__name">Rideaux</span><span class="tile-app__value">Fermés</span><span class="toggle"><i></i></span></div>
+              </div>
+              <div class="app__sec"><span>Porte verrouillée</span><span>Caméra active</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="float float--1"><span class="dot dot--on"></span>Lumière du salon allumée</div>
+        <div class="float float--2"><span class="dot dot--cool"></span>Clim réglée à 24 °C avant votre arrivée</div>
+        <div class="float float--3"><span class="dot dot--warm"></span>Rideaux fermés à 18 h 30</div>
+      </div>
+    </section>
+
+    <!-- ================= TUILE 2 : PACK STANDARD ================= -->
+    <section class="tile tile--light" id="packs">
+      <div class="tile__copy" data-reveal>
+        <p class="tile__kicker">Pack Salon</p>
+        <h2 class="tile__title">Standard</h2>
+        <p class="tile__tagline">Votre première maison connectée.</p>
+        <p class="tile__meta"><strong>160 000 FCFA</strong> · Interrupteur intelligent, climatiseur connecté, télévision connectée, système de musique</p>
+        <div class="tile__actions">
+          <a class="pill pill--fill" href="#pack-standard-detail" data-toggle="pack-standard-detail">En savoir plus</a>
+          <a class="pill pill--line" href="configurateur.html?pack=standard">Voir en 3D</a>
+        </div>
+      </div>
+      <figure class="tile__product" data-reveal-visual>
+        <img src="assets/img/amazon/echo-trio.jpg" alt="Écran Echo Show, enceinte Echo et téléviseur connecté affichant Prime Video" width="1600" height="901" loading="lazy" />
+        <figcaption>Télévision connectée, enceinte Echo et écran Echo Show · visuel Amazon, utilisé avec autorisation</figcaption>
+      </figure>
+      <div class="lineup" aria-label="Équipements du Pack Salon Standard" data-reveal-visual>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="light"></span><span>Interrupteur intelligent</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="snow"></span><span>Climatiseur connecté</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="tv"></span><span>Télévision connectée</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="music"></span><span>Système de musique</span></div>
+      </div>
+      <div class="tile__detail" id="pack-standard-detail" hidden>
+        <div class="detail">
+          <div><h3>Ce que vous pilotez</h3><p>La lumière du salon, le climatiseur, la télévision et la musique répondent à la même application, chez vous comme à distance.</p></div>
+          <div><h3>Ce que ça change</h3><p>On allume avant de rentrer, on éteint ce qu'on a oublié, on programme le soir. La maison devient plus simple à vivre.</p></div>
+          <div><h3>Et ensuite</h3><p>Le pack est évolutif : rideaux, caméras, serrure ou alarme s'ajoutent plus tard, sans repartir de zéro.</p></div>
+        </div>
+        <div class="vid vid--detail" data-video data-autoplay>
+          <video class="vid__player" preload="metadata" muted loop playsinline poster="assets/img/amazon/alexa-maison.jpg" width="1280" height="720" aria-label="Vidéo : Alexa dans la cuisine, conversation naturelle avec l'écran Echo Show">
+            <source src="assets/video/alexa-video-1.webm" type="video/webm" />
+            <source src="assets/video/alexa-video-1.mp4" type="video/mp4" />
+          </video>
+          <button class="vid__play" type="button" aria-label="Lire la vidéo (19 secondes)"><span></span></button>
+          <button class="vid__sound" type="button" aria-label="Activer le son" aria-pressed="false"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TUILE 3 : PACK PREMIUM ================= -->
+    <section class="tile tile--dark" id="pack-premium">
+      <div class="tile__copy" data-reveal>
+        <p class="tile__kicker">Pack Salon</p>
+        <h2 class="tile__title">Premium</h2>
+        <p class="tile__tagline">Le salon connecté, au complet.</p>
+        <p class="tile__meta"><strong>250 000 FCFA</strong> · Tout le Standard, plus rideau ou volet intelligent, solutions de sécurité et installation personnalisée</p>
+        <div class="tile__actions">
+          <a class="pill pill--fill" href="#pack-premium-detail" data-toggle="pack-premium-detail">En savoir plus</a>
+          <a class="pill pill--line pill--light" href="configurateur.html?pack=premium">Voir en 3D</a>
+        </div>
+      </div>
+      <div class="lineup lineup--dark" aria-label="Équipements du Pack Salon Premium" data-reveal-visual>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="light"></span><span>Interrupteur intelligent</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="snow"></span><span>Climatiseur connecté</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="tv"></span><span>Télévision connectée</span></div>
+        <div class="lineup__item"><span class="lineup__icon" data-icon="music"></span><span>Système de musique</span></div>
+        <div class="lineup__item is-plus"><span class="lineup__icon" data-icon="curtain"></span><span>Rideau ou volet</span></div>
+        <div class="lineup__item is-plus"><span class="lineup__icon" data-icon="shield"></span><span>Sécurité</span></div>
+        <div class="lineup__item is-plus"><span class="lineup__icon" data-icon="sliders"></span><span>Personnalisation</span></div>
+      </div>
+      <div class="tile__detail" id="pack-premium-detail" hidden>
+        <div class="detail detail--dark">
+          <div><h3>Tout le Standard</h3><p>Lumière, climatiseur, télévision et musique pilotés depuis le téléphone.</p></div>
+          <div><h3>Les rideaux en plus</h3><p>Un rideau ou un volet intelligent qui s'ouvre et se ferme à distance ou à heure fixe.</p></div>
+          <div><h3>La sécurité et le sur-mesure</h3><p>Des solutions de sécurité définies avec votre conseiller, et une installation adaptée à votre logement.</p></div>
+        </div>
+        <div class="vid vid--detail" data-video data-autoplay>
+          <video class="vid__player" preload="metadata" muted loop playsinline poster="assets/img/amazon/alexa-detente.jpg" width="1280" height="720" aria-label="Vidéo : réveil en douceur, les rideaux s'ouvrent et la lumière monte progressivement">
+            <source src="assets/video/alexa-video-3.webm" type="video/webm" />
+            <source src="assets/video/alexa-video-3.mp4" type="video/mp4" />
+          </video>
+          <button class="vid__play" type="button" aria-label="Lire la vidéo (23 secondes)"><span></span></button>
+          <button class="vid__sound" type="button" aria-label="Activer le son" aria-pressed="false"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TUILE 4 : SUR MESURE ================= -->
+    <section class="tile tile--white" id="configurateur">
+      <div class="tile__copy" data-reveal>
+        <p class="tile__kicker">Sur mesure</p>
+        <h2 class="tile__title">Compose ta maison en 3D.</h2>
+        <p class="tile__tagline">Un pack de base, puis uniquement ce qui compte pour vous. Le prix évolue en direct.</p>
+        <div class="tile__actions">
+          <a class="pill pill--fill" href="configurateur.html">Ouvrir le configurateur</a>
+          <a class="pill pill--line" href="#demo">Voir la démonstration</a>
+        </div>
+      </div>
+      <div class="compose" data-reveal-visual>
+        <div class="compose__mock">
+          <div class="mock">
+            <div class="mock__bar"><i></i><i></i><i></i></div>
+            <div class="mock__body">
+              <div class="mock__scene"><div class="mock__room"></div><div class="mock__chip mock__chip--1">+ Caméra</div><div class="mock__chip mock__chip--2">+ Rideau</div></div>
+              <div class="mock__panel">
+                <div class="mock__line mock__line--title"></div>
+                <div class="mock__line"></div><div class="mock__line"></div><div class="mock__line short"></div>
+                <div class="mock__price">à partir de <strong data-count="300000">300 000 FCFA</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="calc" aria-label="Exemple de composition">
+          <p class="calc__title">Exemple de composition</p>
+          <div class="calc__row"><span>Pack de base</span><span>160 000</span></div>
+          <div class="calc__row"><span>Caméra</span><span>+ 60 000</span></div>
+          <div class="calc__row"><span>Rideau intelligent</span><span>+ 60 000</span></div>
+          <div class="calc__row"><span>Capteur</span><span>+ 20 000</span></div>
+          <div class="calc__total"><span>Total</span><span data-count="300000">300 000 FCFA</span></div>
+          <p class="calc__note">Vous ajoutez, retirez et déplacez les équipements dans une vraie maquette, puis vous envoyez le projet sur WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TUILE 5 : DÉMONSTRATION (défilement scénarisé) ================= -->
+    <section class="demo" id="demo">
+      <div class="demo__sticky">
+        <div class="demo__canvas-wrap">
+          <canvas id="demo-scene" aria-label="Maquette 3D d'un salon connecté, animée selon l'étape sélectionnée" role="img"></canvas>
+          <p class="demo__fallback" id="demo-fallback" hidden>La démonstration 3D n'est pas disponible sur cet appareil.</p>
+        </div>
+        <div class="demo__overlay">
+          <p class="tile__kicker tile__kicker--light">Voyez le résultat</p>
+          <h2 class="tile__title tile__title--light">Un salon qui répond au téléphone.</h2>
+        </div>
+        <ol class="demo__steps" id="demo-steps">
+          <li class="demo__step is-active" data-step="0"><h3>La lumière répond.</h3><p>Un interrupteur intelligent remplace l'existant. On allume, on éteint, on programme : depuis le canapé ou depuis la route.</p></li>
+          <li class="demo__step" data-step="1"><h3>Les rideaux se ferment seuls.</h3><p>Le rideau ou le volet intelligent se ferme à la tombée du jour, ou en un geste quand le soleil tape.</p></li>
+          <li class="demo__step" data-step="2"><h3>Le salon devient connecté.</h3><p>Télévision, climatisation et musique répondent à la même application. C'est le Pack Salon, à partir de 160 000 FCFA.</p></li>
+        </ol>
+        <div class="demo__dots" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+        <div class="demo__voice" id="demo-voice" aria-label="Essayez une commande vocale"></div>
+        <p class="demo__caption">Maquette 3D · défilez ou touchez une commande · <a href="configurateur.html">la manipuler dans le configurateur ›</a></p>
+      </div>
+    </section>
+
+    <!-- ================= TUILE : ALEXA ================= -->
+    <section class="tile tile--dark alexa" id="alexa">
+      <div class="tile__copy" data-reveal>
+        <p class="tile__kicker">La voix de la maison</p>
+        <h2 class="tile__title">Vous parlez. La maison répond.</h2>
+        <p class="tile__tagline">Les packs NÉO-CONNECT s'installent avec une enceinte Amazon Echo et l'assistant vocal Alexa.</p>
+        <p class="tile__meta">Un mot suffit pour la lumière, les rideaux, la climatisation, la télévision ou la musique. Et tout reste pilotable depuis l'application sur le téléphone.</p>
+      </div>
+      <div class="alexa__visual" data-reveal-visual>
+        <div class="vid" data-video data-autoplay>
+          <video class="vid__player" preload="metadata" muted loop playsinline poster="assets/img/amazon/alexa-salon.jpg" width="1280" height="720" aria-label="Vidéo : soirée film dans le salon, la télévision et la lumière répondent à la voix">
+            <source src="assets/video/alexa-video-2.webm" type="video/webm" />
+            <source src="assets/video/alexa-video-2.mp4" type="video/mp4" />
+          </video>
+          <button class="vid__play" type="button" aria-label="Lire la vidéo (18 secondes)"><span></span></button>
+          <button class="vid__sound" type="button" aria-label="Activer le son" aria-pressed="false"></button>
+        </div>
+        <div class="alexa__bubbles" aria-hidden="true">
+          <span class="bubble bubble--user">« Alexa, ferme les rideaux et mets la clim à 24. »</span>
+          <span class="bubble bubble--alexa">C'est fait. Je lance la playlist du soir ?</span>
+        </div>
+      </div>
+      <div class="alexa__grid" data-reveal-visual>
+        <article class="alexa__card"><img class="alexa__card-img" src="assets/img/amazon/alexa-cuisine.jpg" alt="" loading="lazy" width="784" height="920" />
+          <div class="alexa__card-text"><h3>Des conversations naturelles</h3><p>Vous parlez comme à quelqu'un de la maison : une demande, puis une autre, sans formule à retenir.</p></div>
+        </article>
+        <article class="alexa__card"><img class="alexa__card-img" src="assets/img/amazon/alexa-salon.jpg" alt="" loading="lazy" width="784" height="920" />
+          <div class="alexa__card-text"><h3>Une maison qui obéit en une phrase</h3><p>« Alexa, soirée film » peut baisser les lumières, fermer les rideaux et lancer la télé. Les routines s'enchaînent à la voix, à heure fixe ou sur un événement.</p></div>
+        </article>
+        <article class="alexa__card"><img class="alexa__card-img" src="assets/img/amazon/alexa-detente.jpg" alt="" loading="lazy" width="784" height="920" />
+          <div class="alexa__card-text"><h3>La musique et l'information</h3><p>Musique, radio, minuteurs, météo, rappels : l'enceinte répond sans que vous sortiez le téléphone.</p></div>
+        </article>
+        <article class="alexa__card"><img class="alexa__card-img" src="assets/img/amazon/alexa-app.jpg" alt="" loading="lazy" width="784" height="920" />
+          <div class="alexa__card-text"><h3>Partout, même absent</h3><p>Ce que vous dites à la maison, vous pouvez aussi le faire depuis l'application Alexa, où que vous soyez.</p></div>
+        </article>
+      </div>
+      <p class="alexa__note">Alexa, Echo et Fire TV sont des marques d'Amazon. Visuels Amazon utilisés avec autorisation. Les fonctions disponibles dépendent du compte Amazon, du pays et des services souscrits ; votre conseiller NÉO-CONNECT vous précise ce qui s'applique chez vous.</p>
+    </section>
+
+    <!-- ================= GRILLE : ÉQUIPEMENTS À LA CARTE ================= -->
+    <section class="grid-section" id="equipements">
+      <div class="grid-section__head" data-reveal>
+        <p class="tile__kicker">À la carte</p>
+        <h2 class="tile__title">Ajoutez ce qui compte pour vous.</h2>
+        <p class="tile__tagline">Aujourd'hui ou plus tard. Les prix « dès » dépendent du modèle choisi et sont confirmés sur devis.</p>
+      </div>
+      <div class="grid">
+        <article class="gtile gtile--light" data-reveal>
+          <div class="gtile__copy"><h3>Caméras</h3><p>Gardez un œil sur la maison, avec alerte en cas de mouvement.</p><p class="gtile__price">Dès 60 000 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="camera"></span></div>
+        </article>
+        <article class="gtile gtile--dark" data-reveal>
+          <div class="gtile__copy"><h3>Serrures intelligentes</h3><p>Ouvrez sans clé, donnez un accès temporaire, sachez qui est entré.</p><p class="gtile__price">Dès 60 000 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="lock"></span></div>
+        </article>
+        <article class="gtile gtile--dark" data-reveal>
+          <div class="gtile__copy"><h3>Capteurs</h3><p>Mouvement, ouverture d'une porte ou d'une fenêtre : la maison vous prévient et réagit.</p><p class="gtile__price">Dès 15 000 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="sensor"></span></div>
+        </article>
+        <article class="gtile gtile--light" data-reveal>
+          <div class="gtile__copy"><h3>Alarme</h3><p>Armez et désarmez depuis le téléphone, recevez l'alerte immédiatement.</p><p class="gtile__price">149 900 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="alarm"></span></div>
+        </article>
+        <article class="gtile gtile--light" data-reveal>
+          <div class="gtile__copy"><h3>Rideaux et volets intelligents</h3><p>Ouverture et fermeture à distance ou à heure fixe, sans toucher au rideau existant.</p><p class="gtile__price">60 000 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="curtain"></span></div>
+        </article>
+        <article class="gtile gtile--dark" data-reveal>
+          <div class="gtile__copy"><h3>Aspirateurs robots</h3><p>Le sol nettoyé pendant votre absence, programmé depuis le téléphone.</p><p class="gtile__price">Dès 149 900 FCFA</p><a class="link" href="configurateur.html">Ajouter en 3D <span>›</span></a></div>
+          <div class="gtile__visual"><span data-icon="robot"></span></div>
+        </article>
+      </div>
+      <div class="offers" data-reveal>
+        <p><strong>Offres spéciales.</strong> Des offres sont proposées régulièrement. Demandez les offres en cours à votre conseiller.</p>
+        <a class="link" href="#contact">Contacter un conseiller <span>›</span></a>
+      </div>
+    </section>
+
+    <!-- ================= CAROUSEL : POURQUOI ================= -->
+    <section class="carousel-section" id="pourquoi">
+      <div class="carousel-section__head" data-reveal>
+        <h2 class="tile__title">Ce que vous gagnez vraiment.</h2>
+        <div class="carousel__nav" aria-hidden="true">
+          <button type="button" class="carousel__btn" data-carousel-prev aria-label="Précédent">‹</button>
+          <button type="button" class="carousel__btn" data-carousel-next aria-label="Suivant">›</button>
+        </div>
+      </div>
+      <div class="carousel" data-carousel>
+        <article class="ccard ccard--1"><p class="ccard__kicker">Confort</p><h3>Plus simple à vivre.</h3><p>La lumière, la clim et la télé répondent depuis le canapé, ou avant même de rentrer.</p></article>
+        <article class="ccard ccard--2"><p class="ccard__kicker">Contrôle</p><h3>Le téléphone devient la télécommande de la maison.</h3><p>Chez vous comme à distance.</p></article>
+        <article class="ccard ccard--3"><p class="ccard__kicker">Modernité</p><h3>D'une maison classique à une maison intelligente.</h3><p>Sans tout reconstruire.</p></article>
+        <article class="ccard ccard--4"><p class="ccard__kicker">Personnalisation</p><h3>Vous choisissez ce dont vous avez besoin.</h3><p>Pièce par pièce, équipement par équipement.</p></article>
+        <article class="ccard ccard--5"><p class="ccard__kicker">Sécurité</p><h3>Caméras, serrures, capteurs, alarme.</h3><p>Intégrés à la même installation, alertes sur le téléphone.</p></article>
+        <article class="ccard ccard--6"><p class="ccard__kicker">Évolutivité</p><h3>Commencez par un pack. Ajoutez ensuite.</h3><p>Rien n'oblige à tout acheter dès le départ.</p></article>
+        <article class="ccard ccard--7"><p class="ccard__kicker">Visualisation</p><h3>Voyez le résultat avant l'installation.</h3><p>La maquette 3D permet de concevoir le projet. <a href="configurateur.html">Essayer ›</a></p></article>
+      </div>
+    </section>
+
+    <!-- ================= DÉROULEMENT ================= -->
+    <section class="steps-section" id="deroulement">
+      <div class="steps-section__head" data-reveal>
+        <h2 class="tile__title">De l'idée à la maison connectée.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step" data-reveal><span class="step__num">1</span><h3>Vous composez votre projet</h3><p>Depuis le configurateur 3D ou en discutant avec un conseiller sur WhatsApp.</p></li>
+        <li class="step" data-reveal><span class="step__num">2</span><h3>Nous confirmons le devis</h3><p>Un conseiller précise emplacements, équipements existants et options, puis confirme le devis.</p></li>
+        <li class="step" data-reveal><span class="step__num">3</span><h3>Nous installons et connectons</h3><p>L'équipe installe, configure et relie l'ensemble à votre téléphone.</p></li>
+        <li class="step" data-reveal><span class="step__num">4</span><h3>Vous pilotez, et vous évoluez</h3><p>Vous ajouterez d'autres équipements plus tard, sans repartir de zéro.</p></li>
+      </ol>
+    </section>
+
+    <!-- ================= RÉALISATIONS ================= -->
+    <section class="works" id="realisations">
+      <div class="works__head" data-reveal>
+        <p class="tile__kicker">Réalisations</p>
+        <h2 class="tile__title">Nos installations, en vidéo.</h2>
+        <p class="tile__tagline">Appartements, bureaux, serrures, caméras : NÉO-CONNECT filme ses installations et les publie sur TikTok. Touchez une vidéo pour la voir.</p>
+        <p class="works__proof"><a href="https://www.tiktok.com/@neoconnect_" target="_blank" rel="noopener"><strong data-tiktok-followers>121,9 K</strong> abonnés et <strong data-tiktok-likes>423 K</strong> mentions J'aime sur TikTok ›</a></p>
+      </div>
+      <div class="works__strip" id="works-strip">
+        <a class="work work--more" href="https://www.tiktok.com/@neoconnect_" target="_blank" rel="noopener"><span class="work__body"><span class="work__title">Voir nos réalisations sur TikTok</span><span class="work__meta">@neoconnect_</span></span></a>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq" id="faq">
+      <div class="faq__inner">
+        <h2 class="tile__title" data-reveal>Questions fréquentes.</h2>
+        <div class="faq__list" data-reveal>
+          <details class="faq__item" open><summary>Que comprend exactement le Pack Salon Standard ?</summary><p>Le Pack Salon Standard, à 160 000 FCFA, comprend un interrupteur intelligent, un climatiseur connecté, une télévision connectée et un système de musique. C'est la première configuration de maison connectée, pensée pour le salon.</p></details>
+          <details class="faq__item"><summary>Quelle est la différence avec le Pack Salon Premium ?</summary><p>Le Pack Salon Premium, à 250 000 FCFA, reprend les équipements du Standard et ajoute un rideau ou volet intelligent, des solutions de sécurité et une personnalisation de l'installation.</p></details>
+          <details class="faq__item"><summary>Puis-je composer ma propre installation ?</summary><p>Oui. Vous partez d'un pack de base et ajoutez les équipements dont vous avez besoin : caméras, serrures, capteurs, alarme, rideaux ou aspirateur robot. Le configurateur affiche le prix au fur et à mesure.</p></details>
+          <details class="faq__item"><summary>Les prix affichés sont-ils définitifs ?</summary><p>Les prix des packs, des rideaux et de l'alarme sont les prix annoncés. Les équipements indiqués « dès » ont un prix de départ qui dépend du modèle choisi. Le devis final est confirmé par un conseiller après étude de votre logement.</p></details>
+          <details class="faq__item"><summary>Dans quels pays intervenez-vous ?</summary><p>NÉO-CONNECT intervient partout en Afrique. Des conseillers WhatsApp sont basés au Bénin, au Togo et en Côte d'Ivoire ; depuis un autre pays, écrivez au conseiller de votre choix, il organise l'intervention avec vous.</p></details>
+          <details class="faq__item"><summary>Comment fonctionne la commande vocale ?</summary><p>Les packs s'installent avec une enceinte Amazon Echo et l'assistant Alexa. Une fois les équipements reliés, vous les pilotez à la voix (« Alexa, allume la lumière du salon ») ou depuis l'application Alexa sur le téléphone. Les services payants éventuels, comme la musique en streaming, dépendent de votre compte Amazon et de votre pays ; votre conseiller vous précise ce qui s'applique chez vous.</p></details>
+          <details class="faq__item"><summary>Dois-je tout installer en une fois ?</summary><p>Non. L'installation est évolutive : vous pouvez commencer par un pack et ajouter des équipements progressivement.</p></details>
+          <details class="faq__item"><summary>Comment envoyer ma configuration ?</summary><p>Depuis le configurateur, le récapitulatif de votre projet s'envoie directement sur WhatsApp au conseiller de votre pays, avec le lien pour la retrouver. Vous n'avez rien à ressaisir.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="tile tile--light contact" id="contact">
+      <div class="tile__copy" data-reveal>
+        <p class="tile__kicker">Passer à l'action</p>
+        <h2 class="tile__title">Tu choisis. NÉO-CONNECT s'occupe de la transformation.</h2>
+        <p class="tile__tagline">Composez votre projet en 3D, ou écrivez à un conseiller. Nous intervenons partout en Afrique.</p>
+        <div class="countries">
+          <a class="country" data-wa="BJ" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#"><span data-flag="BJ"></span><span><strong>Bénin</strong><small>+229 91 02 12 93</small></span></a>
+          <a class="country" data-wa="TG" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#"><span data-flag="TG"></span><span><strong>Togo</strong><small>+228 98 97 27 46</small></span></a>
+          <a class="country" data-wa="CI" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#"><span data-flag="CI"></span><span><strong>Côte d'Ivoire</strong><small>+225 05 96 30 52 00</small></span></a>
+        </div>
+        <p class="tile__meta">Ailleurs en Afrique ? Écrivez au conseiller le plus proche ou utilisez le formulaire en précisant votre pays.</p>
+        <p class="tile__meta contact__links">
+          <a href="mailto:neoconnectafrica@gmail.com">neoconnectafrica@gmail.com</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.tiktok.com/@neoconnect_" target="_blank" rel="noopener">TikTok</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.instagram.com/neo_connect229" target="_blank" rel="noopener">Instagram</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.facebook.com/share/1Jnnr9a3XA/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        </p>
+      </div>
+      <form class="contact__form" id="contact-form" novalidate data-reveal-visual>
+        <h3>Être rappelé par un conseiller</h3>
+        <p class="muted">Votre message part sur WhatsApp, au conseiller du pays choisi.</p>
+        <label class="field"><span class="field__label">Nom</span><input class="field__input" name="name" type="text" autocomplete="name" required /><span class="field__error"></span></label>
+        <label class="field"><span class="field__label">Téléphone</span><input class="field__input" name="phone" type="tel" autocomplete="tel" placeholder="+228 …" required /><span class="field__error"></span></label>
+        <label class="field"><span class="field__label">Pays</span>
+          <select class="field__input" name="country" required>
+            <option value="" disabled selected>Choisir un pays</option>
+            <option value="BJ">Bénin</option>
+            <option value="TG">Togo</option>
+            <option value="CI">Côte d'Ivoire</option>
+            <option value="OTHER">Autre pays d'Afrique</option>
+          </select><span class="field__error"></span></label>
+        <label class="field" data-other-country hidden><span class="field__label">Votre pays</span><input class="field__input" name="countryName" type="text" placeholder="Ex. : Sénégal" /><span class="field__error"></span></label>
+        <label class="field" data-other-country hidden><span class="field__label">Conseiller à contacter</span>
+          <select class="field__input" name="advisor">
+            <option value="BJ" selected>Bénin · +229 91 02 12 93</option>
+            <option value="TG">Togo · +228 98 97 27 46</option>
+            <option value="CI">Côte d'Ivoire · +225 05 96 30 52 00</option>
+          </select></label>
+        <label class="field"><span class="field__label">Votre projet (facultatif)</span><textarea class="field__input" name="message" rows="3" placeholder="Ex. : un salon et deux chambres à connecter à Cotonou"></textarea></label>
+        <button class="pill pill--fill pill--whatsapp" type="submit">Envoyer sur WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Barre fixe téléphone : configurateur 3D + WhatsApp toujours à portée de pouce -->
+  <div class="mcta" id="mcta" aria-label="Actions rapides">
+    <div class="mcta__menu" id="mcta-menu" hidden>
+      <p>Écrire à un conseiller sur WhatsApp</p>
+      <a class="mcta__country" data-wa="BJ" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#contact"><span data-flag="BJ"></span>Bénin</a>
+      <a class="mcta__country" data-wa="TG" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#contact"><span data-flag="TG"></span>Togo</a>
+      <a class="mcta__country" data-wa="CI" data-wa-text="Bonjour NÉO-CONNECT, je souhaite des informations sur une maison connectée." href="#contact"><span data-flag="CI"></span>Côte d'Ivoire</a>
+    </div>
+    <a class="mcta__main" href="configurateur.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+      <span>Composer ma maison en 3D</span>
+    </a>
+    <button class="mcta__wa" type="button" aria-label="Écrire sur WhatsApp" aria-expanded="false" aria-controls="mcta-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-1.8-1-1 .8a4 4 0 0 1-2-2l.8-1-1-1.8L9 9.5Z"/></svg>
+    </button>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <a class="footer__logo" href="#top" aria-label="NÉO-CONNECT"><img class="logo-full" src="assets/img/logo-dark.png" alt="NÉO-CONNECT" width="278" height="287" /></a>
+      <p class="footer__note">Les prix des packs et de l'alarme sont les prix annoncés par NÉO-CONNECT. Les équipements indiqués « dès » ont un prix de départ qui dépend du modèle choisi ; le devis final est confirmé par un conseiller après étude du logement. Visuels 3D à titre d'illustration.</p>
+      <div class="footer__cols">
+        <div><h4>Offres</h4><ul><li><a href="#packs">Pack Salon Standard</a></li><li><a href="#pack-premium">Pack Salon Premium</a></li><li><a href="#configurateur">Sur mesure</a></li><li><a href="#equipements">Équipements à la carte</a></li></ul></div>
+        <div><h4>Découvrir</h4><ul><li><a href="#demo">Démonstration</a></li><li><a href="configurateur.html">Configurateur 3D</a></li><li><a href="#deroulement">Déroulement</a></li><li><a href="#faq">Questions fréquentes</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li><a data-wa="BJ" href="#">Bénin · +229 91 02 12 93</a></li><li><a data-wa="TG" href="#">Togo · +228 98 97 27 46</a></li><li><a data-wa="CI" href="#">Côte d'Ivoire · +225 05 96 30 52 00</a></li><li><a href="mailto:neoconnectafrica@gmail.com">neoconnectafrica@gmail.com</a></li><li><a href="https://www.tiktok.com/@neoconnect_" target="_blank" rel="noopener">TikTok @neoconnect_</a> · <a href="https://www.instagram.com/neo_connect229" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/share/1Jnnr9a3XA/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+      </div>
+      <div class="footer__bottom"><span>© <span data-year></span> NÉO-CONNECT, marque de Zanboss Electronics, société enregistrée au Bénin. Tous droits réservés.</span><span>Partout en Afrique · Conseillers au Bénin, au Togo et en Côte d'Ivoire</span></div>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/js/home.js"></script>
+  <script type="module" src="assets/js/realisations.js"></script>
+</body>
+</html>
+
+</body></html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_encode.html
+
+Sitemap: https://neoconnectafrica.github.io/sitemap.xml

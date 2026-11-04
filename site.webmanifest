@@ -1,0 +1,14 @@
+{
+  "name": "NÉO-CONNECT",
+  "short_name": "NÉO-CONNECT",
+  "description": "Ta maison, pilotée depuis ton téléphone. Maison connectée partout en Afrique.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#2f6bff",
+  "lang": "fr",
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
