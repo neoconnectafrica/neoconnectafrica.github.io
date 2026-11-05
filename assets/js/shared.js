@@ -85,9 +85,13 @@ function initWhatsAppBubble() {
     let shown = false;
     const show = () => {
       if (shown || root.classList.contains('is-open')) return;
-      const contact = document.querySelector('#contact');
-      if (contact) { const r = contact.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) return; }
+      // pas par-dessus le formulaire de contact ni par-dessus les étapes de la démo 3D
+      for (const sel of ['#contact', '#demo']) {
+        const el = document.querySelector(sel);
+        if (el) { const r = el.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) return; }
+      }
       shown = true; teaser.classList.add('is-shown'); window.removeEventListener('scroll', onScroll);
+      setTimeout(() => teaser.classList.remove('is-shown'), 10000); // disparaît seule ; le bouton WhatsApp reste
     };
     const onScroll = () => { if (window.scrollY > innerHeight * 0.9) show(); };
     window.addEventListener('scroll', onScroll, { passive: true });

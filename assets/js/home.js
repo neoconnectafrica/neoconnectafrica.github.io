@@ -180,6 +180,14 @@ for (const el of qsa('[data-count]')) {
 /* ---------- démonstration 3D : canvas collant, étapes au défilement ----------
    La scène 3D (Three.js) ne se charge que lorsque la section approche de l'écran :
    l'arrivée sur la page reste rapide, surtout en 3G/4G. */
+/** Résout dès que la page n'a pas défilé depuis 180 ms. */
+const scrollQuiet = () => new Promise((resolve) => {
+  let t = null;
+  const done = () => { window.removeEventListener('scroll', bump); resolve(); };
+  const bump = () => { clearTimeout(t); t = setTimeout(done, 180); };
+  window.addEventListener('scroll', bump, { passive: true });
+  bump();
+});
 const startDemo = async () => {
   const canvas = qs('#demo-scene');
   const section = qs('.demo');
@@ -187,26 +195,45 @@ const startDemo = async () => {
   const steps = qsa('.demo__step');
   const dots = qsa('.demo__dots i');
   let scene = null, store = null;
+  let scrolling = false, pendingSync = false, quietTimer = null;
   try {
     const [{ ConfiguratorScene }, { ConfigStore }, { environmentById }] = await Promise.all([
       import('./scene/Scene.js'), import('./store/configStore.js'), import('./data/environments.js'),
     ]);
+    // La construction de la scène attend une pause dans le défilement : jamais de gel pendant que le doigt glisse.
+    await scrollQuiet();
     store = new ConfigStore({ persist: false });
     store.choosePack('premium');
     // Démo de la page d'accueil : la maquette tourne seule et ne capte AUCUN geste (molette, doigt, souris),
     // pour que la page défile librement sur ordinateur comme sur téléphone. L'interaction se fait dans le configurateur.
-    scene = new ConfiguratorScene(canvas, { interactive: false, autoRotate: true, quality: 'low', fitPortrait: false });
+    scene = new ConfiguratorScene(canvas, { interactive: false, autoRotate: true, quality: 'low', fitPortrait: false, maxPixelRatio: isTouch() ? 1 : 1.5 });
+    scene.setPaused(true);
     scene.controls.disconnect();
     canvas.style.touchAction = 'auto';
     // Rendu en pause dès que la section n'est plus à l'écran (sinon la carte graphique tourne en continu).
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([e]) => scene.setPaused(!e.isIntersecting), { rootMargin: '100px 0px' }).observe(section);
-    }
+
     scene.onContextLost = () => { qs('#demo-fallback').hidden = false; };
     scene.onContextRestored = () => { qs('#demo-fallback').hidden = true; };
     scene.setEnvironment(environmentById('salon'));
     scene.sync(store.state.items);
     scene.camera.position.set(3.6, 2.3, 5.2); scene.controls.target.set(-0.4, 0.9, -0.6); scene.controls.update();
+    await scene.warmup();
+    // Rendu en pause quand la section n'est pas à l'écran ET pendant que le doigt fait défiler la page :
+    // la maquette ne dispute plus le processeur au défilement ; elle reprend dès que le défilement s'arrête.
+    let visible = !('IntersectionObserver' in window);
+    const refresh = () => {
+      scene.setPaused(!visible || scrolling);
+      if (!scrolling && pendingSync && store) { pendingSync = false; scene.sync(store.state.items); }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; refresh(); }, { rootMargin: '100px 0px' }).observe(section);
+    }
+    window.addEventListener('scroll', () => {
+      if (!scrolling) { scrolling = true; refresh(); }
+      clearTimeout(quietTimer);
+      quietTimer = setTimeout(() => { scrolling = false; refresh(); }, 160);
+    }, { passive: true });
+    refresh();
   } catch (e) {
     console.warn('Démo 3D indisponible', e);
     qs('#demo-fallback').hidden = false;
@@ -219,7 +246,7 @@ const startDemo = async () => {
     dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
     if (store && scene) {
       for (const a of DEMO_STEPS[idx].actions) store.setOptionForProduct(a.product, a.option, a.value);
-      scene.sync(store.state.items);
+      if (scrolling) pendingSync = true; else scene.sync(store.state.items); // mise à jour 3D dès l'arrêt du défilement
     }
   };
   steps.forEach((s, i) => s.addEventListener('click', () => apply((i + 1) % steps.length)));
@@ -255,9 +282,17 @@ const startDemo = async () => {
 (() => {
   const section = qs('.demo');
   if (!section) return;
-  if (!('IntersectionObserver' in window)) { startDemo(); return; }
-  const lazy = new IntersectionObserver(([e]) => { if (e.isIntersecting) { lazy.disconnect(); startDemo(); } }, { rootMargin: '900px 0px' });
-  lazy.observe(section);
+  let started = false;
+  const go = () => { if (!started) { started = true; startDemo(); } };
+  // 1) Préparation discrète quand le visiteur ne fait rien, quelques secondes après l'ouverture de la page ;
+  // 2) au plus tard quand il s'approche de la section (≈ 2 écrans avant).
+  const idle = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 3000 }) : setTimeout(fn, 800));
+  const afterLoad = () => setTimeout(() => idle(go), 5000);
+  if (document.readyState === 'complete') afterLoad(); else window.addEventListener('load', afterLoad, { once: true });
+  if ('IntersectionObserver' in window) {
+    const near = new IntersectionObserver(([e]) => { if (e.isIntersecting) { near.disconnect(); go(); } }, { rootMargin: '1600px 0px' });
+    near.observe(section);
+  } else go();
 })();
 
 /* ---------- formulaire de contact → WhatsApp ---------- */

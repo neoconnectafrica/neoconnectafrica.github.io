@@ -16,7 +16,7 @@ const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)
  * - Qualité adaptée à l'appareil (ombres, pixel ratio).
  */
 export class ConfiguratorScene {
-  constructor(canvas, { interactive = true, onSelect = null, onHover = null, autoRotate = false, quality = 'auto', fitPortrait = true } = {}) {
+  constructor(canvas, { interactive = true, onSelect = null, onHover = null, autoRotate = false, quality = 'auto', fitPortrait = true, maxPixelRatio = null } = {}) {
     this.canvas = canvas;
     this.fitPortrait = fitPortrait;
     this.onSelect = onSelect;
@@ -35,7 +35,7 @@ export class ConfiguratorScene {
 
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
     const touch = window.matchMedia('(pointer: coarse)').matches;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, this.quality === 'high' ? 2 : (touch ? 1.35 : 1.5)));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, this.quality === 'high' ? 2 : (touch ? 1.35 : 1.5), maxPixelRatio || Infinity));
     this.renderer.shadowMap.enabled = this.quality === 'high';
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -286,6 +286,9 @@ export class ConfiguratorScene {
   resize() {
     const el = this.canvas.parentElement || this.canvas;
     const w = Math.max(1, el.clientWidth), h = Math.max(1, el.clientHeight);
+    // Même taille : on ne touche à rien (redimensionner vide et réalloue le canvas, ce qui saccade le défilement mobile).
+    if (w === this._w && h === this._h) return;
+    this._w = w; this._h = h;
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h;
     // Écran étroit : on garde la largeur de champ d'un écran 16:10 pour que la pièce entière reste visible.
@@ -295,6 +298,12 @@ export class ConfiguratorScene {
       this.camera.fov = Math.min(78, THREE.MathUtils.radToDeg(2 * Math.atan(t)));
     } else this.camera.fov = BASE_FOV;
     this.camera.updateProjectionMatrix();
+    this.invalidate();
+  }
+
+  /** Prépare les shaders en tâche de fond (sans bloquer la page) avant le premier affichage. */
+  async warmup() {
+    try { if (this.renderer.compileAsync) await this.renderer.compileAsync(this.scene, this.camera); } catch { /* repli : compilation au premier rendu */ }
     this.invalidate();
   }
 
