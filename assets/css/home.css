@@ -450,3 +450,17 @@ body.home { background: var(--tile-white); }
 .tile--dark, .hero, .demo, .alexa { --link: #4f82ff; }
 .tile--dark .pill--fill, .hero .pill--fill, .demo .pill--fill, .alexa .pill--fill { background: #2b64f5; }
 .alexa .bubble--alexa, .demo .voice-btn.is-said, .tile--dark .voice-btn.is-said { background: #2b64f5; border-color: #2b64f5; }
+
+/* ---------- démo 3D sur téléphone : plus de section « collée » ----------
+   La section défile comme le reste de la page (une hauteur d'écran) au lieu de rester figée
+   sur 2,3 écrans ; les étapes avancent seules. Le flou « verre dépoli » des cartes, recalculé
+   à chaque image au-dessus de la 3D, est remplacé par un fond plein (beaucoup plus léger). */
+.demo.demo--compact { height: auto; }
+.demo.demo--compact .demo__sticky { position: relative; top: auto; height: 92svh; min-height: 560px; }
+@media (max-width: 760px), (pointer: coarse) {
+  .demo__step { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20,20,22,0.88); }
+  .voice-btn { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20,20,22,0.86); }
+  /* en-tête : flou supprimé sur téléphone (recalculé en permanence au défilement, surtout au-dessus de la 3D et des vidéos) */
+  .site-header.is-scrolled { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.96); }
+  .site-header--dark.is-scrolled { background: rgba(0,0,0,0.94); }
+}

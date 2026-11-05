@@ -267,8 +267,22 @@ const startDemo = async () => {
       voiceHost.append(b);
     }
   }
-  if (!motionOK) return;
-  // La section mesure plusieurs écrans ; la progression du défilement choisit l'étape.
+  // Téléphone (ou mouvement réduit) : la section défile normalement comme le reste de la page ;
+  // les étapes avancent seules toutes les 4 s quand la section est à l'écran (et au toucher d'une étape).
+  const compact = !motionOK || window.matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+  if (compact) {
+    section.classList.add('demo--compact');
+    let onScreen = false, timer = null;
+    const tick = () => { if (onScreen && !scrolling) apply((current + 1) % steps.length); };
+    const startTimer = () => { clearInterval(timer); if (onScreen && motionOK) timer = setInterval(tick, 4000); };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; startTimer(); }, { threshold: 0.45 }).observe(section);
+    }
+    // toucher une étape = étape suivante, et le minuteur repart de zéro
+    steps.forEach((s) => s.addEventListener('click', startTimer));
+    return;
+  }
+  // Ordinateur : la section mesure plusieurs écrans ; la progression du défilement choisit l'étape.
   const onScroll = () => {
     const r = section.getBoundingClientRect();
     const travel = r.height - window.innerHeight;
