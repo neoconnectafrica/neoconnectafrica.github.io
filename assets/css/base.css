@@ -1,3 +1,10 @@
+/* Polices auto-hébergées (SIL Open Font License, voir assets/fonts/) :
+   plus de dépendance à Google Fonts, qui bloquait l'affichage ≈ 0,9 s sur mobile. */
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-display: swap; font-weight: 200 800;
+  src: url('../fonts/bricolage-grotesque.woff2') format('woff2-variations'), url('../fonts/bricolage-grotesque.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Sans'; font-style: normal; font-display: swap; font-weight: 400 700;
+  src: url('../fonts/instrument-sans.woff2') format('woff2-variations'), url('../fonts/instrument-sans.woff2') format('woff2'); }
+
 /* ==========================================================================
    NÉO-CONNECT — fondations : jetons, typographie, composants partagés
    ========================================================================== */
@@ -13,7 +20,7 @@
   --ink-3: #7b858f;
   --line: rgba(15, 20, 25, 0.1);
   --line-strong: rgba(15, 20, 25, 0.18);
-  --accent: #2f6bff;
+  --accent: #2b64f5; /* légèrement assombri : contraste texte blanc 4,95:1 (WCAG AA) */
   --accent-ink: #1d4fd1;
   --accent-soft: #e6eeff;
   --warm: #f2b544;
@@ -256,3 +263,7 @@ p { margin: 0; }
   .wa-fab { width: 56px; height: 56px; }
   .wa-teaser { max-width: calc(100vw - 100px); font-size: 0.84rem; }
 }
+
+/* Pastille WhatsApp : le chiffre est décoratif (CSS), pour que le nom accessible du bouton reste son libellé. */
+.wa-fab__badge::before { content: attr(data-n); }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

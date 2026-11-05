@@ -14,6 +14,7 @@ import { renderQuotePanel } from './ui/quotePanel.js';
 import { createMobileFlow } from './ui/mobileFlow.js';
 import { toast } from './ui/toast.js';
 import { initShared } from './shared.js';
+import { track } from './services/analytics.js';
 
 initShared();
 
@@ -127,6 +128,11 @@ function onChoosePack(packId) {
 /* ---------- rendu ----------
    Chaque mutation du store émet un événement : l'interface et la scène se
    resynchronisent à partir de l'état, jamais à la main. */
+track('ViewContent', { content_name: 'Configurateur 3D' });
+let customized = false;
+store.subscribe((state) => {
+  if (!customized && (state.items || []).some((i) => !i.fromPack)) { customized = true; track('CustomizeProduct', { content_name: 'Configurateur 3D' }); }
+});
 store.subscribe((state, event) => {
   if (event.type === 'notes') return; // la saisie libre ne redessine pas le panneau (le focus resterait perdu)
   if (selectedUid && !store.item(selectedUid)) { selectedUid = null; scene?.setSelected(null); }

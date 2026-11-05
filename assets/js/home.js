@@ -7,6 +7,7 @@ import { initShared } from './shared.js';
 import { SITE } from './config.js';
 import { whatsappUrl, validateForm, resolveContact, submitToEndpoint } from './services/quote.js';
 import { toast } from './ui/toast.js';
+import { track } from './services/analytics.js';
 import { DEMO_STEPS, VOICE_COMMANDS } from './data/content.js';
 
 document.documentElement.classList.add('js');
@@ -77,17 +78,25 @@ window.addEventListener('scroll', syncHeader, { passive: true });
 setTimeout(() => qs('.hero')?.classList.add('is-settled'), 2600);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) qs('.hero')?.classList.add('is-settled'); });
 
-/* ---------- entrée du hero (GSAP si disponible) ---------- */
-const onReady = (fn) => (document.readyState === 'complete' ? fn() : window.addEventListener('load', fn));
-onReady(() => {
-  if (!motionOK || !window.gsap) return;
-  // L'entrée du hero est en CSS (fiable même si le script tarde) ; GSAP ne gère que le fondu au défilement.
-  const g = window.gsap;
-  if (window.ScrollTrigger) {
-    g.registerPlugin(window.ScrollTrigger);
-    g.to('.hero__visual', { yPercent: 10, opacity: 0.35, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'bottom 90%', end: 'bottom 20%', scrub: true } });
-  }
-});
+/* ---------- fondu du visuel du hero au défilement ----------
+   Remplace GSAP + ScrollTrigger (≈ 3,6 s de calcul sur un mobile moyen) par
+   quelques lignes : même effet, calculé seulement pendant que le hero est visible. */
+(() => {
+  const hero = qs('.hero'); const vis = qs('.hero__visual');
+  if (!motionOK || !hero || !vis) return;
+  let ticking = false, active = true;
+  const update = () => {
+    ticking = false;
+    const r = hero.getBoundingClientRect(); const vh = window.innerHeight;
+    // départ : bas du hero à 90 % de l'écran ; fin : bas du hero à 20 %
+    const t = Math.min(1, Math.max(0, (vh * 0.9 - r.bottom) / (vh * 0.7)));
+    vis.style.transform = t ? `translate3d(0, ${(t * 10).toFixed(2)}%, 0)` : '';
+    vis.style.opacity = t ? String(1 - t * 0.65) : '';
+  };
+  const onScroll = () => { if (active && !ticking) { ticking = true; requestAnimationFrame(update); } };
+  new IntersectionObserver(([e]) => { active = e.isIntersecting; if (active) onScroll(); }).observe(hero);
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 
 /* ---------- « En savoir plus » : détails dépliables ---------- */
 for (const btn of qsa('[data-toggle]')) {
@@ -168,8 +177,10 @@ for (const el of qsa('[data-count]')) {
   qs('[data-carousel-next]')?.addEventListener('click', () => track.scrollBy({ left: cardW(), behavior: motionOK ? 'smooth' : 'auto' }));
 })();
 
-/* ---------- démonstration 3D : canvas collant, étapes au défilement ---------- */
-(async () => {
+/* ---------- démonstration 3D : canvas collant, étapes au défilement ----------
+   La scène 3D (Three.js) ne se charge que lorsque la section approche de l'écran :
+   l'arrivée sur la page reste rapide, surtout en 3G/4G. */
+const startDemo = async () => {
   const canvas = qs('#demo-scene');
   const section = qs('.demo');
   if (!canvas || !section) return;
@@ -240,6 +251,13 @@ for (const el of qsa('[data-count]')) {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+};
+(() => {
+  const section = qs('.demo');
+  if (!section) return;
+  if (!('IntersectionObserver' in window)) { startDemo(); return; }
+  const lazy = new IntersectionObserver(([e]) => { if (e.isIntersecting) { lazy.disconnect(); startDemo(); } }, { rootMargin: '900px 0px' });
+  lazy.observe(section);
 })();
 
 /* ---------- formulaire de contact → WhatsApp ---------- */
@@ -258,6 +276,7 @@ form?.addEventListener('submit', (e) => {
   const { countryName, advisor } = resolveContact(data);
   const text = ['Bonjour NÉO-CONNECT, je souhaite être rappelé(e).', `Nom : ${data.name}`, `Téléphone : ${data.phone}`, `Pays : ${countryName}`, data.message ? `Projet : ${data.message}` : null].filter(Boolean).join('\n');
   window.open(whatsappUrl(advisor.code, text), '_blank', 'noopener');
+  track('Lead', { content_name: 'Formulaire de contact', content_category: countryName });
   toast(`WhatsApp s'ouvre avec votre message pour le conseiller ${advisor.name}.`, 'success', 5000);
   // En plus de WhatsApp : copie à NÉO-CONNECT par e-mail si un service de réception est configuré (integrations/README.md).
   if (SITE.quoteEndpoint) {

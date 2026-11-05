@@ -268,3 +268,16 @@ body.cfg-mobile .cfg-stage .wa-card { position: fixed; left: 12px; right: 12px; 
 body.cfg-mobile .cfg-stage .wa-teaser { display: none; }
 body.cfg-mobile .cfg-stage .wa-card { z-index: 6; }
 body.cfg-mobile .cfg-stage .wa-bubble.is-open .wa-fab { opacity: 0; pointer-events: none; }
+
+/* ---------- téléphone : en-tête aéré et bouton WhatsApp qui ne cache plus la maquette ---------- */
+@media (max-width: 480px) {
+  .cfg-top .brand span { display: none; }          /* le logo seul suffit ; le nom reste lu par les lecteurs d'écran (aria-label) */
+  .cfg-top__actions { gap: 0.3rem; }
+  .cfg-top .icon-btn { width: 40px; height: 40px; }
+}
+/* Bulle WhatsApp (dans la zone 3D) : plus petite, et l'indication « Glissez un doigt » décalée
+   à gauche pour qu'elles ne se chevauchent plus. */
+body.cfg-mobile .cfg-stage .wa-bubble { bottom: 0.7rem; right: 0.6rem; }
+body.cfg-mobile .wa-fab { width: 48px; height: 48px; }
+body.cfg-mobile .wa-fab svg { width: 26px; height: 26px; }
+body.cfg-mobile .mhint { left: 0.8rem; right: auto; transform: none; max-width: calc(100% - 80px); }

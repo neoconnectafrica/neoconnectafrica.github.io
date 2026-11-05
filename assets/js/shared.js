@@ -1,9 +1,11 @@
 /** Comportements communs : bandeau provisoire, navigation, année du pied de page. */
 import { qs, qsa, h } from './lib/dom.js';
+import { initAnalytics } from './services/analytics.js';
 import { SITE, waLink } from './config.js';
 import { flag } from './lib/icons.js';
 
 export function initShared() {
+  initAnalytics();
   // Bandeau « visuels provisoires »
   if (SITE.showDraftBanner && !sessionStorage.getItem('nc.banner.closed')) {
     const banner = h('div', { class: 'draft-banner', role: 'note' },
@@ -70,12 +72,25 @@ function initWhatsAppBubble() {
   const teaser = h('button', { type: 'button', class: 'wa-teaser', onClick: () => { hideTeaser(); open(); } },
     h('span', {}, 'Une question ? ', h('strong', {}, 'On vous répond sur WhatsApp')),
     h('span', { class: 'wa-teaser__x', 'aria-label': 'Masquer', onClick: (e) => { e.stopPropagation(); hideTeaser(); } }, '×'));
-  const btn = h('button', { type: 'button', class: 'wa-fab', 'aria-label': 'Besoin d’aide ? Écrire à NÉO-CONNECT sur WhatsApp', 'aria-expanded': 'false', html: WA_ICON + '<span class="wa-fab__badge" aria-hidden="true">1</span>' });
+  const btn = h('button', { type: 'button', class: 'wa-fab', 'aria-label': 'Besoin d’aide ? Écrire à NÉO-CONNECT sur WhatsApp', 'aria-expanded': 'false', html: WA_ICON + '<span class="wa-fab__badge" aria-hidden="true" data-n="1"></span>' });
   const root = h('div', { class: 'wa-bubble' }, card, teaser, btn);
   function open() { root.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); root.classList.add('is-seen'); }
   btn.addEventListener('click', (e) => { e.stopPropagation(); hideTeaser(); root.classList.contains('is-open') ? close() : open(); });
   document.addEventListener('click', (e) => { if (root.classList.contains('is-open') && !root.contains(e.target)) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
   document.body.append(root);
-  if (!teaserSeen) setTimeout(() => { if (!root.classList.contains('is-open')) teaser.classList.add('is-shown'); }, 4000);
+  // La bulle d'aide n'apparaît plus par-dessus le haut de page : seulement après un vrai défilement
+  // (le visiteur a commencé à lire) ou au bout de 20 s, et jamais quand le formulaire de contact est à l'écran.
+  if (!teaserSeen) {
+    let shown = false;
+    const show = () => {
+      if (shown || root.classList.contains('is-open')) return;
+      const contact = document.querySelector('#contact');
+      if (contact) { const r = contact.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) return; }
+      shown = true; teaser.classList.add('is-shown'); window.removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => { if (window.scrollY > innerHeight * 0.9) show(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    setTimeout(show, 20000);
+  }
 }

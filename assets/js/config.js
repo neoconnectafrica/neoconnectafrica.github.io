@@ -31,6 +31,12 @@ export const SITE = {
   quoteEndpoint: 'https://script.google.com/macros/s/AKfycbyuT67WI4H20Py_R4rpRfdQY1yCBqbNXyyoKrOaO___0QnZFyX05a1MnmtU8Kg16-S9/exec',
   // Bandeau « visuels provisoires » affiché tant que les photos et modèles réels ne sont pas intégrés.
   showDraftBanner: false,
+  // Mesure des conversions : renseigner ces identifiants pour activer le suivi (voir services/analytics.js).
+  // Vides = aucun script de suivi chargé.
+  analytics: {
+    metaPixelId: '', // ex. '123456789012345' (Gestionnaire d'événements Meta)
+    ga4Id: '',       // ex. 'G-XXXXXXXXXX' (Google Analytics 4)
+  },
 };
 
 export function waLink(country, text) {

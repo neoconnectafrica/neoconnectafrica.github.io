@@ -1,4 +1,5 @@
 import { h, clear } from '../lib/dom.js';
+import { track } from '../services/analytics.js';
 import { icon } from '../lib/icons.js';
 import { SITE, formatPrice } from '../config.js';
 import { buildRecap, whatsappUrl, submitToEndpoint, copyText, downloadText, downloadUrl, validateForm, resolveContact } from '../services/quote.js';
@@ -77,6 +78,7 @@ export function renderQuotePanel(root, store, { getSnapshot, goTab }, formState)
       const { countryName, advisor } = contact();
       const text = buildRecap(store, { ...formState, country: countryName });
       window.open(whatsappUrl(advisor.code, text), '_blank', 'noopener');
+      track('Lead', { content_name: 'Configurateur 3D', content_category: countryName, value: pricing.total || undefined, currency: 'XOF' });
       toast(`WhatsApp s’ouvre avec votre récapitulatif pour le conseiller ${advisor.name}. Envoyez le message pour transmettre votre demande.`, 'success', 6000);
     } }));
   actions.append(h('p', { class: 'note' }, 'WhatsApp s’ouvre avec le récapitulatif complet et le lien de votre configuration. Vous n’avez rien à ressaisir.'));
@@ -93,6 +95,7 @@ export function renderQuotePanel(root, store, { getSnapshot, goTab }, formState)
         btn.disabled = true;
         const res = await submitToEndpoint({ source: 'configurateur', form, config: store.state, recap: buildRecap(store, { ...formState, country: countryName }), link: store.shareLink(), snapshot: getSnapshot?.() });
         btn.disabled = false;
+        if (res.ok) track('Lead', { content_name: 'Configurateur 3D (formulaire)', content_category: countryName, value: pricing.total || undefined, currency: 'XOF' });
         if (res.ok) toast('Demande envoyée. Un conseiller NÉO-CONNECT vous recontacte.', 'success', 5000);
         else toast(res.reason === 'timeout' ? 'Le service de réception ne répond pas. Utilisez WhatsApp ou réessayez.' : 'L’envoi a échoué. Utilisez WhatsApp ou réessayez.', 'error', 6000);
       } }));
