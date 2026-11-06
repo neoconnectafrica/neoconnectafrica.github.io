@@ -184,12 +184,14 @@ export class ConfiguratorScene {
   focusItem(uid) {
     const g = this.meshes.get(uid);
     if (!g) return;
+    g.updateWorldMatrix(true, false); // l'objet vient peut-être d'être ajouté : matrice pas encore calculée
     const anchor = (g.userData.anchor || new THREE.Vector3()).clone().applyMatrix4(g.matrixWorld);
     const slot = this.env.slots.find((s) => s.id === g.userData.slotId);
     const dir = new THREE.Vector3();
     if (slot?.wall) dir.set({ left: 1, right: -1 }[slot.wall] || 0, 0, { back: 1, front: -1 }[slot.wall] || 0);
     else dir.copy(this.camera.position).sub(anchor).setY(0).normalize();
-    const dist = g.userData.productId === 'rideau' || g.userData.productId === 'tv' || g.userData.productId === 'clim' ? 3.4 : 2.2;
+    let dist = g.userData.productId === 'rideau' || g.userData.productId === 'tv' || g.userData.productId === 'clim' ? 3.4 : 2.2;
+    if (g.userData.productId === 'portail') { dir.set(1, 0, 0.55).normalize(); dist = 5.2; } // vu depuis la rue
     const target = anchor.clone().add(dir.multiplyScalar(dist)).add(new THREE.Vector3(0, 0.9, 0));
     this.flyTo(target, anchor);
   }

@@ -118,6 +118,9 @@ export class ConfigStore {
     if (this.itemsOfProduct(productId).length >= p.maxInstances) {
       return { ok: false, reason: `Nombre maximal atteint pour « ${p.name} » dans cette pièce.` };
     }
+    if (!slotsOfType(this.env, p.slotType).length) {
+      return { ok: false, reason: `« ${p.name} » ne se place pas dans cette pièce. Choisissez le salon ou le grand salon pour l'ajouter.` };
+    }
     const free = this.freeSlotsFor(p);
     const slot = slotId ? free.find((s) => s.id === slotId) : free[0];
     if (!slot) return { ok: false, reason: 'Tous les emplacements prévus pour cet équipement sont occupés. Retirez ou remplacez un élément.' };

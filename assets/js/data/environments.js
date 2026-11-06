@@ -38,6 +38,7 @@ const salonBase = (w, h, d, extraSlots = [], extraFurniture = []) => ({
     { id: 'capteur-fenetre', type: 'sensor', label: 'Cadre de la fenêtre', wall: 'left', pos: [-w / 2, 2.2, -0.3] },
     { id: 'alarme-entree', type: 'wall-panel', label: "Près de la porte d'entrée", wall: 'right', pos: [w / 2, 1.5, 0.2] },
     { id: 'sol', type: 'floor', label: 'Au sol, près du canapé', pos: [1.2, 0, 1.3] },
+    { id: 'portail-entree', type: 'gate', label: "À l'entrée de la parcelle, devant la porte", pos: [w / 2 + 2.4, 0, 1.2], wall: 'right' },
     ...extraSlots,
   ],
 });

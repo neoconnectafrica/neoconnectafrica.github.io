@@ -16,6 +16,7 @@ const paths = {
   lock: '<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2"/>',
   sensor: '<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/>',
   alarm: '<path d="M12 4a6 6 0 0 1 6 6v4l2 3H4l2-3v-4a6 6 0 0 1 6-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+  gate: '<path d="M3 21V5M21 21V5"/><path d="M3 8h18M3 19h18"/><path d="M7 8v11M11 8v11M15 8v11M19 8v11"/>',
   robot: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v2M12 18v2"/>',
   whatsapp: '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-1.8-1-1 .8a4 4 0 0 1-2-2l.8-1-1-1.8L9 9.5Z"/>',
   check: '<path d="m5 12 4 4L19 6"/>',
@@ -59,6 +60,6 @@ export function flag(code) {
 
 export const PRODUCT_ICONS = {
   interrupteur: 'light', clim: 'snow', tv: 'tv', musique: 'music', rideau: 'curtain',
-  camera: 'camera', serrure: 'lock', capteur: 'sensor', alarme: 'alarm', aspirateur: 'robot',
+  camera: 'camera', serrure: 'lock', capteur: 'sensor', alarme: 'alarm', portail: 'gate', aspirateur: 'robot',
 };
 export const ENV_ICONS = { salon: 'sofa', 'grand-salon': 'wide', chambre: 'bed' };

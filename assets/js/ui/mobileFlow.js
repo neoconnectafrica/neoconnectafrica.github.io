@@ -126,7 +126,7 @@ export function createMobileFlow(root, store, scene, { getSnapshot, formState })
     const full = count >= p.maxInstances || free === 0;
     let priceLabel;
     if (inPack && count <= 1) priceLabel = 'Inclus dans le pack';
-    else if (p.price == null) priceLabel = 'Sur devis';
+    else if (p.price == null) priceLabel = p.onOrder ? 'Sur commande · sur devis' : 'Sur devis';
     else priceLabel = `${p.priceKind === 'from' ? 'Dès ' : ''}${formatPrice(p.price)}`;
 
     const add = () => {

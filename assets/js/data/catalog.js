@@ -2,6 +2,7 @@
  * Catalogue NÉO-CONNECT.
  * Source : brief NÉO-CONNECT (packs, équipements à la carte, prix annoncés).
  * - price: montant en FCFA. null = non communiqué → affiché « Sur devis », exclu du total.
+ * - onOrder: true = fabriqué / posé sur commande (affiché « Sur commande », prix sur devis).
  * - priceKind: 'fixed' (prix annoncé) | 'from' (« Dès … », le devis final précise).
  * - visual: 'placeholder' tant que les photos / modèles réels ne sont pas intégrés.
  * - slotType: type d'emplacement dans la maquette (voir environments.js).
@@ -11,6 +12,7 @@ export const CATEGORIES = [
   { id: 'pilotage', label: 'Pilotage du salon', blurb: 'Les équipements des packs Salon : lumière, climatisation, télévision et musique depuis le téléphone.' },
   { id: 'ouvertures', label: 'Rideaux & volets', blurb: 'Ouvrez et fermez vos rideaux ou volets à distance ou à heure fixe.' },
   { id: 'securite', label: 'Sécurité', blurb: 'Caméras, serrures, capteurs et alarme pour surveiller et protéger la maison.' },
+  { id: 'acces', label: 'Portail', blurb: 'Portail motorisé ouvert depuis le téléphone, la télécommande ou à la voix, même à distance.' },
   { id: 'entretien', label: 'Entretien', blurb: 'Aspirateur robot programmable depuis le téléphone.' },
 ];
 
@@ -101,10 +103,21 @@ export const PRODUCTS = [
   },
   {
     id: 'alarme', category: 'securite', slotType: 'wall-panel',
-    name: 'Alarme', short: 'Protection de la maison avec alerte sur le téléphone',
-    description: "Une alarme armée ou désarmée depuis le téléphone, qui prévient immédiatement en cas d'intrusion.",
+    name: "Système d'alarme complet", short: 'Centrale, sirène et capteurs, alerte sur le téléphone',
+    description: "Un kit complet : centrale à écran et clavier, sirène, détecteurs de présence et capteurs d'ouverture. L'alarme s'arme et se désarme depuis le téléphone, avec un badge ou une télécommande, et prévient immédiatement en cas d'intrusion.",
     price: 149900, priceKind: 'fixed', inPacks: [], visual: 'placeholder', maxInstances: 1,
     options: [],
+  },
+  {
+    id: 'portail', category: 'acces', slotType: 'gate',
+    name: 'Portail motorisé', short: 'Ouvert depuis le téléphone, même à distance',
+    description: "Le portail s'ouvre et se ferme depuis le téléphone, la télécommande ou à la voix avec Alexa. Même en voyage, vous laissez entrer un proche ou une livraison et vous voyez s'il est bien refermé. Réalisé sur commande, selon les dimensions de votre entrée : le prix est établi sur devis.",
+    voice: ['Alexa, ouvre le portail', 'Alexa, ferme le portail'],
+    price: null, priceKind: null, onOrder: true, inPacks: [], visual: 'placeholder', maxInstances: 1,
+    options: [
+      { id: 'type', label: 'Type', kind: 'variant', values: [{ id: 'coulissant', label: 'Coulissant' }, { id: 'battant', label: 'Battant (deux vantaux)' }], default: 'coulissant' },
+      { id: 'demo', label: 'Démonstration', kind: 'demo', values: [{ id: 'open', label: 'Ouvert' }, { id: 'closed', label: 'Fermé' }], default: 'closed' },
+    ],
   },
   {
     id: 'aspirateur', category: 'entretien', slotType: 'floor',

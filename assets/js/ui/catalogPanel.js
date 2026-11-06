@@ -64,7 +64,7 @@ function productCard(p, store, pricing, onAdd) {
   const inPack = store.pack && p.inPacks.includes(store.pack.id);
   const full = count >= p.maxInstances || free === 0;
   let priceLabel;
-  if (p.price == null) priceLabel = inPack ? 'Inclus dans le pack' : 'Sur devis';
+  if (p.price == null) priceLabel = inPack ? 'Inclus dans le pack' : p.onOrder ? 'Sur commande · prix sur devis' : 'Sur devis';
   else priceLabel = `${p.priceKind === 'from' ? 'Dès ' : ''}${formatPrice(p.price)}`;
   if (inPack && p.price != null && count === 0) priceLabel = 'Inclus dans le pack';
 

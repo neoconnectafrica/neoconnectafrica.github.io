@@ -73,7 +73,7 @@ function renderInspector(item, store, actions) {
   const slots = slotsOfType(env, p.slotType);
 
   const pf = priceFor(p, item.options);
-  const priceLabel = item.fromPack ? 'Inclus dans le pack' : pf.price == null ? 'Sur devis' : `${pf.priceKind === 'from' ? 'Dès ' : ''}${formatPrice(pf.price)}`;
+  const priceLabel = item.fromPack ? 'Inclus dans le pack' : pf.price == null ? (p.onOrder ? 'Sur commande · prix sur devis' : 'Sur devis') : `${pf.priceKind === 'from' ? 'Dès ' : ''}${formatPrice(pf.price)}`;
 
   const box = h('section', { class: 'inspector' },
     h('div', { class: 'inspector__head' },

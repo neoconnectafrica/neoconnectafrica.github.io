@@ -166,6 +166,55 @@ const builders = {
     g.userData.anchor = new THREE.Vector3(0, 0.2, 0);
     return g;
   },
+  portail(options) {
+    // Portail extérieur (posé devant la porte d'entrée, côté rue). Axe x local = largeur du portail,
+    // z local = vers la maison. Variante coulissante ou battante, démonstration ouvert / fermé.
+    const g = new THREE.Group();
+    const W = 3.2, H = 1.7, PIL = 0.32;
+    const stone = mat(0xd9d2c5, { roughness: 0.9 });
+    const pave = mat(0xbdb5a6, { roughness: 1 });
+    const metal = mat(0x2b2f36, { roughness: 0.45, metalness: 0.6 });
+    // sol : dalle sous le portail + allée jusqu'à la porte
+    g.add(box(W + 2 * PIL + 2.6, 0.04, 1.1, pave, { y: 0.02, castShadow: false }));
+    g.add(box(1.1, 0.03, 2.3, pave, { y: 0.015, z: 1.55, castShadow: false }));
+    // piliers et murets de clôture
+    for (const sx of [-1, 1]) {
+      g.add(box(PIL, H + 0.35, PIL, stone, { x: sx * (W / 2 + PIL / 2), y: (H + 0.35) / 2 }));
+      g.add(box(PIL + 0.06, 0.06, PIL + 0.06, mat(0xc9c1b3, { roughness: 0.8 }), { x: sx * (W / 2 + PIL / 2), y: H + 0.38 }));
+      g.add(box(1.25, H - 0.1, 0.22, stone, { x: sx * (W / 2 + PIL + 0.62), y: (H - 0.1) / 2 }));
+      const lamp = led(0xffd28a, 0.035); lamp.position.set(sx * (W / 2 + PIL / 2), H + 0.12, 0.17); g.add(lamp);
+    }
+    const leaf = (w) => {
+      const l = new THREE.Group();
+      l.add(box(w, 0.06, 0.05, metal, { y: H - 0.03 }), box(w, 0.06, 0.05, metal, { y: 0.1 }), box(w, 0.05, 0.05, metal, { y: H * 0.55 }));
+      for (let x = 0.04; x < w; x += 0.13) l.add(box(0.03, H - 0.1, 0.03, metal, { x: x - w / 2, y: H / 2 + 0.03 }));
+      l.add(box(0.06, H, 0.05, metal, { x: -w / 2 + 0.03, y: H / 2 + 0.03 }), box(0.06, H, 0.05, metal, { x: w / 2 - 0.03, y: H / 2 + 0.03 }));
+      return l;
+    };
+    const slide = leaf(W); g.add(slide);
+    const left = new THREE.Group(), right = new THREE.Group();
+    const lw = W / 2; const ll = leaf(lw); ll.position.x = lw / 2; left.add(ll); left.position.x = -W / 2;
+    const rl = leaf(lw); rl.position.x = -lw / 2; right.add(rl); right.position.x = W / 2;
+    g.add(left, right);
+    // moteur + voyant
+    const motor = roundedBox(0.34, 0.3, 0.24, 0.04, mat(0xe9e7e2, { roughness: 0.5 }), { x: W / 2 - 0.25, y: 0.19, z: 0.32 });
+    const lightMat = new THREE.MeshStandardMaterial({ color: 0xffa23a, emissive: 0xff8a00, emissiveIntensity: 0 });
+    const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 12), lightMat);
+    beacon.position.set(W / 2 + PIL / 2, H + 0.47, 0);
+    g.add(motor, beacon);
+    g.userData.applyOptions = (o) => {
+      const open = o.demo === 'open';
+      const battant = o.type === 'battant';
+      slide.visible = !battant; left.visible = battant; right.visible = battant;
+      slide.position.x = open ? -(W + 0.15) : 0; slide.position.z = -0.12;
+      left.rotation.y = open ? -1.35 : 0; right.rotation.y = open ? 1.35 : 0;
+      motor.visible = true;
+      lightMat.emissiveIntensity = open ? 2.4 : 0.15;
+    };
+    g.userData.applyOptions(options);
+    g.userData.anchor = new THREE.Vector3(0, 1.0, 0);
+    return g;
+  },
   aspirateur() {
     const g = new THREE.Group();
     const body = cylinder(0.17, 0.17, 0.09, mat(0x23262c, { roughness: 0.5, metalness: 0.2 }), { y: 0.045, segments: 36 });
